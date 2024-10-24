@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const loginSchema = z.object({
-  name: z.string().min(2, "No mínimo 2 letras"),
+  name: z.string().min(2, "O nome precisa ter no mínimo duas letras"),
 })
 
 
