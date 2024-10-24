@@ -8,6 +8,7 @@ export default {
   	extend: {
   		colors: {
   			'teddy-orange': '#EC6724',
+        'teddy-white': "#F5F5F5",
   			'teddy-gray': {
   				primary: '#D9D9D9',
   				secondary: '#AAAAAA'
