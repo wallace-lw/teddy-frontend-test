@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.5rem
+  }
+}
+
+@font-face {
+  font-family: "Inter", sans-serif;
+  src: url('./assets/fonts/Inter.ttf');
+}
+
+* {
+  font-family: "Inter", sans-serif;
+}
