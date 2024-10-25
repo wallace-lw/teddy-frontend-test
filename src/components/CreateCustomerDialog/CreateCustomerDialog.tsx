@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ErrorMessage } from "../ErrorMessage";
 import { cn } from "@/lib/utils";
+import { createUser } from "@/services/createUser";
 
 export const CreateCustomerDialog = () => {
 	const {
@@ -23,8 +24,8 @@ export const CreateCustomerDialog = () => {
 		resolver: zodResolver(customerSchema),
 	});
 
-	const onSubmit = (data: CustomerSchema) => {
-		console.log(data);
+	const onSubmit = async () => {
+		await createUser();
 	};
 
 	return (
@@ -74,7 +75,7 @@ export const CreateCustomerDialog = () => {
 						type="text"
 						placeholder="Digite o valor da empresa:"
 						autoComplete="off"
-						{...register("companyValue")}
+						{...register("companyValuation")}
 						className={cn(
 							"h-12 px-2  border-teddy-gray-primary  placeholder:text-teddy-gray-secondary",
 							errors.name?.message
@@ -82,8 +83,8 @@ export const CreateCustomerDialog = () => {
 								: "focus-visible:ring-teddy-orange",
 						)}
 					/>
-					{errors.companyValue?.message && (
-						<ErrorMessage message={errors.companyValue.message} />
+					{errors.companyValuation?.message && (
+						<ErrorMessage message={errors.companyValuation.message} />
 					)}
 					<Button
 						className="bg-teddy-orange text-white font-semibold"
