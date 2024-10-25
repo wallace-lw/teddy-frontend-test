@@ -23,7 +23,7 @@ export const LoginForm: React.FC = () => {
 
 	const onSubmit = (data: LoginSchema) => {
 		handleUsername(data.name);
-		navigate("/clientes");
+		navigate("/clientes?page=1&limit=16");
 	};
 
 	return (
