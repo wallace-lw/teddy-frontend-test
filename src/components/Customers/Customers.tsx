@@ -22,21 +22,21 @@ export const Customers = () => {
 					// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 					<CustomerCard key={index} />
 				))}
-				<div className="w-full flex items-center mt-2 gap-3">
-					<p className="font-semibold">Clientes por página:</p>
-					<Select>
-						<SelectTrigger className="w-14">
-							<SelectValue>16</SelectValue>
-						</SelectTrigger>
-						<SelectContent>
-							<SelectGroup>
-								<SelectItem value="16">16</SelectItem>
-								<SelectItem value="24">24</SelectItem>
-								<SelectItem value="32">32</SelectItem>
-							</SelectGroup>
-						</SelectContent>
-					</Select>
-				</div>
+			</div>
+			<div className="w-full flex items-center mt-2 gap-3">
+				<p className="font-semibold">Clientes por página:</p>
+				<Select>
+					<SelectTrigger className="w-14">
+						<SelectValue>16</SelectValue>
+					</SelectTrigger>
+					<SelectContent>
+						<SelectGroup>
+							<SelectItem value="16">16</SelectItem>
+							<SelectItem value="24">24</SelectItem>
+							<SelectItem value="32">32</SelectItem>
+						</SelectGroup>
+					</SelectContent>
+				</Select>
 			</div>
 		</div>
 	);
