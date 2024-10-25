@@ -7,7 +7,7 @@ interface IProps {
 export const MainLayout: React.FC<IProps> = ({ children }) => {
 	return (
 		<>
-			<Navbar username="Wallace" />
+			<Navbar />
 			{children}
 		</>
 	);

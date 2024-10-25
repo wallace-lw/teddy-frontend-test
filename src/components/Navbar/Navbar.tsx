@@ -5,12 +5,8 @@ import { links } from "@/utils/constants";
 import { NavbarLinks } from "./NavbarLinks";
 import { useAuthContext } from "@/contexts/AuthContext";
 
-interface INavbarProps {
-	username: string;
-}
-
-export const Navbar: React.FC<INavbarProps> = ({ username }) => {
-	const { logout } = useAuthContext();
+export const Navbar: React.FC = () => {
+	const { logout, username } = useAuthContext();
 
 	return (
 		<nav className="flex px-20 py-4 items-center justify-between border-b border-b-teddy-gray-primary">
