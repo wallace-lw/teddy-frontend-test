@@ -11,7 +11,10 @@ export const NavbarLink: React.FC<IProps> = ({ label, to, isActive }) => {
 	return (
 		<Link
 			to={to}
-			className={cn(isActive && "text-teddy-orange underline font-semibold")}
+			className={cn(
+				"hover:text-teddy-orange transition-all",
+				isActive && "text-teddy-orange underline font-semibold",
+			)}
 		>
 			{label}
 		</Link>

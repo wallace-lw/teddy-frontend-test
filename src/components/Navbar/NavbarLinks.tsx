@@ -10,7 +10,7 @@ export const NavbarLinks: React.FC<INavbarLinksProps> = ({ links }) => {
 	const location = useLocation();
 
 	return (
-		<ul className="flex gap-4">
+		<ul className="gap-4 hidden md:flex">
 			{links.map((link) => (
 				<li key={link.id}>
 					<NavbarLink
