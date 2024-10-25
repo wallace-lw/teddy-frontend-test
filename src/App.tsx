@@ -1,7 +1,9 @@
+import { Home } from "./pages";
+
 function App() {
 	return (
 		<>
-			<h1 className="text-3xl">Teddy</h1>
+			<Home />
 		</>
 	);
 }
