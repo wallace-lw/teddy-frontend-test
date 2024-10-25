@@ -7,13 +7,20 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "../ui/select";
+import { useUsersData } from "@/hooks/useUsersData";
 
 export const Customers = () => {
+	const { data, isLoading } = useUsersData();
+
+	if (isLoading) {
+		return <p>Loading...</p>;
+	}
+
 	return (
 		<div className="w-full flex flex-col justify-center items-center mt-5 px-10 md:px-20 pb-10  gap-6">
 			<div className="w-full flex flex-col-reverse gap-3 md:flex-row justify-between items-center">
 				<span className="text-lg">
-					<strong>16</strong> clientes encontrados
+					<strong>{data.clients.length}</strong> clientes encontrados
 				</span>
 				<CreateCustomerDialog />
 			</div>
