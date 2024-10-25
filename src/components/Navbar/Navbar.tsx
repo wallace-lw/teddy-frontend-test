@@ -3,12 +3,15 @@ import teddyLogo from "@/assets/images/teddy-logo.png";
 import { Button } from "../ui/button";
 import { links } from "@/utils/constants";
 import { NavbarLinks } from "./NavbarLinks";
+import { useAuthContext } from "@/contexts/AuthContext";
 
 interface INavbarProps {
 	username: string;
 }
 
 export const Navbar: React.FC<INavbarProps> = ({ username }) => {
+	const { logout } = useAuthContext();
+
 	return (
 		<nav className="flex px-20 py-4 items-center justify-between border-b border-b-teddy-gray-primary">
 			<div className="flex items-center gap-6 ju">
@@ -20,7 +23,10 @@ export const Navbar: React.FC<INavbarProps> = ({ username }) => {
 				<span>
 					Olá, <strong>{username}</strong>
 				</span>
-				<Button className="rounded-full size-7 bg-teddy-orange text-white">
+				<Button
+					className="rounded-full size-7 bg-teddy-orange text-white"
+					onClick={logout}
+				>
 					<LogOutIcon />
 				</Button>
 			</div>
