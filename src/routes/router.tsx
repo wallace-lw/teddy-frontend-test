@@ -2,6 +2,7 @@ import App from "@/App";
 import { LoginPage } from "@/pages";
 import { SelectedCustomers } from "@/pages/SelectedCustomers";
 import { createBrowserRouter } from "react-router-dom";
+import { ProtectedRoute } from "./ProtectedRoute";
 
 export const router = createBrowserRouter([
 	{
@@ -10,10 +11,18 @@ export const router = createBrowserRouter([
 	},
 	{
 		path: "/clientes",
-		element: <App />,
+		element: (
+			<ProtectedRoute>
+				<App />
+			</ProtectedRoute>
+		),
 	},
 	{
 		path: "/clientes-selecionados",
-		element: <SelectedCustomers />,
+		element: (
+			<ProtectedRoute>
+				<SelectedCustomers />
+			</ProtectedRoute>
+		),
 	},
 ]);
