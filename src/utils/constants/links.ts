@@ -1,7 +1,7 @@
 export const links = [
   {
     label: 'Clientes',
-    to: '/',
+    to: '/clientes',
     id: "1",
   },
   {
