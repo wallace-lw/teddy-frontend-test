@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ErrorMessage } from "../ErrorMessage";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "@/contexts";
 
 export const LoginForm: React.FC = () => {
 	const {
@@ -16,10 +17,12 @@ export const LoginForm: React.FC = () => {
 		resolver: zodResolver(loginSchema),
 	});
 
+	const { handleUsername } = useAuthContext();
+
 	const navigate = useNavigate();
 
 	const onSubmit = (data: LoginSchema) => {
-		console.log(data);
+		handleUsername(data.name);
 		navigate("/clientes");
 	};
 
