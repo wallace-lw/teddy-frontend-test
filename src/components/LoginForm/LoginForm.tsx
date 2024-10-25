@@ -20,7 +20,7 @@ export const LoginForm: React.FC = () => {
 
 	const onSubmit = (data: LoginSchema) => {
 		console.log(data);
-		navigate("/");
+		navigate("/clientes");
 	};
 
 	return (
