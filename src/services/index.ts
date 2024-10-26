@@ -1,3 +1,3 @@
-export * from "./getAllUsers";
-export * from "./createUser";
-export * from "./deleteUser";
+export * from "./getAllCustomers";
+export * from "./createCustomer";
+export * from "./deleteCustomer";
