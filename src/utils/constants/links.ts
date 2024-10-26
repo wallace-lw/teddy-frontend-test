@@ -1,7 +1,7 @@
 export const links = [
   {
     label: 'Clientes',
-    to: '/clientes',
+    to: '/clientes?page=1&limit=16',
     id: "1",
   },
   {
