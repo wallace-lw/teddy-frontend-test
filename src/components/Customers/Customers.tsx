@@ -1,4 +1,4 @@
-import { CustomerCard, CreateCustomerDialog } from "@/components";
+import { CustomerCard, CreateCustomerDialog, CardSkeleton } from "@/components";
 import {
 	Select,
 	SelectContent,
@@ -29,10 +29,6 @@ export const Customers = () => {
 		navigate(`/clientes?page=1&limit=${value}`);
 	};
 
-	if (isLoading) {
-		return <p>Loading...</p>;
-	}
-
 	return (
 		<div className="w-full flex flex-col justify-center items-center mt-5 px-10 md:px-20 pb-10  gap-6">
 			<div className="w-full flex flex-col-reverse gap-3 md:flex-row justify-between items-center">
@@ -42,15 +38,20 @@ export const Customers = () => {
 				<CreateCustomerDialog />
 			</div>
 			<div className="w-full flex flex-col sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 place-items-center">
-				{data?.clients.map((customer) => (
-					<CustomerCard
-						key={customer.id}
-						companyValuation={customer.companyValuation}
-						id={customer.id}
-						name={customer.name}
-						salary={customer.salary}
-					/>
-				))}
+				{isLoading
+					? Array.from({ length: 16 }).map((_, index) => (
+							// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+							<CardSkeleton key={index} />
+						))
+					: data?.clients.map((customer) => (
+							<CustomerCard
+								key={customer.id}
+								companyValuation={customer.companyValuation}
+								id={customer.id}
+								name={customer.name}
+								salary={customer.salary}
+							/>
+						))}
 			</div>
 			<div className="w-full flex items-center mt-2 gap-3">
 				<p className="font-semibold">Clientes por página:</p>
