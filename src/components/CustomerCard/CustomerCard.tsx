@@ -9,18 +9,34 @@ import {
 import { Button } from "../ui/button";
 import { CardItem } from "./CardItem";
 import { DeleteCustomerDialog } from "@/components";
+import { formatToBRLCurrency } from "@/utils";
 
 interface ICustomerCardProps {
 	isSelected?: boolean;
+	id: number;
+	name: string;
+	salary: number;
+	companyValuation: number;
 }
 
-export const CustomerCard: React.FC<ICustomerCardProps> = ({ isSelected }) => {
+export const CustomerCard: React.FC<ICustomerCardProps> = ({
+	isSelected,
+	companyValuation,
+	name,
+	salary,
+}) => {
+	const convertedSalary = formatToBRLCurrency(salary);
+	const convertedCompanyValuation = formatToBRLCurrency(companyValuation);
+
 	return (
 		<div className="border border-teddy-gray-primary w-full rounded p-4 flex flex-col gap-4 text-sm md:text-[1rem]">
 			<div className="flex flex-col gap-2">
-				<CardItem Icon={IdCard} label="Wallace Leonardo" />
-				<CardItem Icon={Wallet} label="Salário: R$3500,00" />
-				<CardItem Icon={CircleDollarSign} label="Empresa: R$550.000,00" />
+				<CardItem Icon={IdCard} label={name} />
+				<CardItem Icon={Wallet} label={`Salário: ${convertedSalary}`} />
+				<CardItem
+					Icon={CircleDollarSign}
+					label={`Empresa: ${convertedCompanyValuation}`}
+				/>
 			</div>
 			{isSelected ? (
 				<div className="w-full flex justify-end">
