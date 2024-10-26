@@ -1,18 +1,8 @@
 export default async function handler(req, res) {
-
-
-
-  // const url = decodeURIComponent(req.url.split('/api/proxy?')[1])
+  const url = decodeURIComponent(req.url.split('/api/proxy?')[1])
 
   try {
-    const baseUrl = new URL(req.url, `http://${req.headers.host}`);
-    const targetUrl = baseUrl.searchParams.get('url'); // pega o parâmetro `url` diretamente
-
-    if (!targetUrl) {
-      return res.status(400).json({ message: "Missing target URL" });
-    }
-
-    const response = await fetch(targetUrl, {
+    const response = await fetch(url, {
       method: req.method,
       headers: {
         ...req.headers,
