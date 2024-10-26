@@ -8,9 +8,19 @@ import {
 	SelectValue,
 } from "../ui/select";
 import { useUsersData } from "@/hooks/useUsersData";
+import { PaginationComponent } from "../Pagination";
+import { useSearchParams } from "react-router-dom";
 
 export const Customers = () => {
-	const { data, isLoading } = useUsersData();
+	const [searchParams] = useSearchParams();
+
+	const page = searchParams.get("page");
+	const limit = searchParams.get("limit");
+
+	const { data, isLoading } = useUsersData({
+		page: Number(page),
+		limit: Number(limit),
+	});
 
 	if (isLoading) {
 		return <p>Loading...</p>;
@@ -20,21 +30,26 @@ export const Customers = () => {
 		<div className="w-full flex flex-col justify-center items-center mt-5 px-10 md:px-20 pb-10  gap-6">
 			<div className="w-full flex flex-col-reverse gap-3 md:flex-row justify-between items-center">
 				<span className="text-lg">
-					<strong>{data.clients.length}</strong> clientes encontrados
+					<strong>{data?.clients.length}</strong> clientes encontrados
 				</span>
 				<CreateCustomerDialog />
 			</div>
 			<div className="w-full flex flex-col sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 place-items-center">
-				{Array.from({ length: 16 }).map((_, index) => (
-					// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-					<CustomerCard key={index} />
+				{data?.clients.map((customer) => (
+					<CustomerCard
+						key={customer.id}
+						companyValuation={customer.companyValuation}
+						id={customer.id}
+						name={customer.name}
+						salary={customer.salary}
+					/>
 				))}
 			</div>
 			<div className="w-full flex items-center mt-2 gap-3">
 				<p className="font-semibold">Clientes por página:</p>
 				<Select>
 					<SelectTrigger className="w-14">
-						<SelectValue>16</SelectValue>
+						<SelectValue />
 					</SelectTrigger>
 					<SelectContent>
 						<SelectGroup>
@@ -45,6 +60,11 @@ export const Customers = () => {
 					</SelectContent>
 				</Select>
 			</div>
+			<PaginationComponent
+				totalPages={data?.totalPages!}
+				currentPage={data?.currentPage!}
+				limit={16}
+			/>
 		</div>
 	);
 };
