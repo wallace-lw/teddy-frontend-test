@@ -1,15 +1,14 @@
-import { deleteUser } from "@/services";
+import { deleteCustomer } from "@/services";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const useDeleteCustomer = (id: number) => {
 	const queryClient = useQueryClient();
 
 	const mutation = useMutation({
-		mutationFn: () => deleteUser(id),
+		mutationFn: () => deleteCustomer(id),
 		onSuccess: () => {
-			// Invalidate and refetch queries related to the list of users
 			queryClient.invalidateQueries({
-				queryKey: ["users"],
+				queryKey: ["customers"],
 			});
 		},
 		onError: (error) => {
