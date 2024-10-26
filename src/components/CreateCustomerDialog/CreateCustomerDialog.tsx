@@ -13,8 +13,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ErrorMessage } from "../ErrorMessage";
 import { cn } from "@/lib/utils";
+import { createUser } from "@/services/createUser";
+import { useState } from "react";
 
 export const CreateCustomerDialog = () => {
+	const [dialogIsOpen, setDialogIsOpen] = useState(false);
+
 	const {
 		handleSubmit,
 		register,
@@ -23,12 +27,21 @@ export const CreateCustomerDialog = () => {
 		resolver: zodResolver(customerSchema),
 	});
 
+	const handleDialogOpening = () => {
+		setDialogIsOpen((prev) => !prev);
+	};
+
 	const onSubmit = async (data: CustomerSchema) => {
-		console.log(data);
+		await createUser({
+			companyValuation: Number(data.companyValuation),
+			name: data.name,
+			salary: Number(data.salary),
+		});
+		setDialogIsOpen(false);
 	};
 
 	return (
-		<Dialog>
+		<Dialog open={dialogIsOpen} onOpenChange={handleDialogOpening}>
 			<DialogTrigger>
 				<Button className="bg-transparent border border-teddy-orange text-teddy-orange font-semibold w-full lg:w-[200px] hover:bg-teddy-orange hover:text-white transition-all">
 					<PlusCircle />
