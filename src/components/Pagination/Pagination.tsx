@@ -10,7 +10,6 @@ import {
 	PaginationItem,
 } from "../ui/pagination";
 import { PaginationButton } from "./PaginationButton";
-import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 interface IProps {
