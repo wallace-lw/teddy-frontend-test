@@ -1,10 +1,15 @@
 import { getAllUsers } from "@/services";
 import { useQuery } from "@tanstack/react-query";
 
-export const useUsersData = () => {
+interface IProps {
+	page?: number;
+	limit?: number;
+}
+
+export const useUsersData = ({ limit, page }: IProps) => {
 	const query = useQuery({
 		queryKey: ["users"],
-		queryFn: getAllUsers,
+		queryFn: () => getAllUsers({ page, limit }),
 	});
 
 	return query;
