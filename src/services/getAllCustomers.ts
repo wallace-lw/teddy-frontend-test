@@ -12,7 +12,6 @@ export const getAllCustomers = async ({
 }: IProps): Promise<IAllUsersResponse> => {
 	const response = await fetch(`${API_URL}/users?page=${page}&limit=${limit}`, {
 		method: "GET",
-		mode: "cors",
 	});
 
 	const data: IAllUsersResponse = await response.json();
