@@ -1,13 +1,10 @@
+import { IProviderProps } from "@/interfaces";
 import { createContext, useContext, useEffect, useState } from "react";
 
 interface IAuthContextProps {
 	username: string;
 	handleUsername: (name: string) => void;
 	logout: () => void;
-}
-
-interface IProviderProps {
-	children: React.ReactNode;
 }
 
 export const AuthContext = createContext({} as IAuthContextProps);
