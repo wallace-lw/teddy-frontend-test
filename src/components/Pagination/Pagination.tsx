@@ -40,7 +40,6 @@ export const PaginationComponent: React.FC<IProps> = ({
 		if (totalPages) {
 			searchParams.set("page", String(totalPages));
 			navigate(`/clientes?page=${totalPages}&limit=${limit}`);
-			// window.location.reload();
 		}
 	};
 
@@ -48,28 +47,24 @@ export const PaginationComponent: React.FC<IProps> = ({
 		if (currentPage === 1) return;
 		searchParams.set("page", String(1));
 		navigate(`/clientes?page=1&limit=${limit}`);
-		// window.location.reload();
 	};
 
 	const handleButtonNavigation = (page: number) => {
 		if (currentPage === page) return;
 		searchParams.set("page", String(page));
 		navigate(`/clientes?page=${page}&limit=${limit}`);
-		// window.location.reload();
 	};
 
 	const handleNextPage = () => {
 		if (currentPage === totalPages) return;
 		searchParams.set("page", String(currentPage + 1));
 		navigate(`/clientes?page=${currentPage + 1}&limit=${limit}`);
-		// window.location.reload();
 	};
 
 	const handlePreviousPage = () => {
 		if (currentPage === 1) return;
 		searchParams.set("page", String(currentPage - 1));
 		navigate(`/clientes?page=${currentPage - 1}&limit=${limit}`);
-		// window.location.reload();
 	};
 
 	return (
