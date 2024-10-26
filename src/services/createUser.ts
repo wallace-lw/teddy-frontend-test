@@ -1,16 +1,28 @@
-export const createUser = async () => {
+import { useLocation } from "react-router-dom";
+
+interface IProps {
+	name: string;
+	salary: number;
+	companyValuation: number;
+}
+
+export const createUser = async ({
+	companyValuation,
+	name,
+	salary,
+}: IProps) => {
 	const response = await fetch(
-		"https://boasorte.teddybackoffice.com.br/users",
+		"https://cors-anywhere.herokuapp.com/https://boasorte.teddybackoffice.com.br/users",
 		{
 			method: "POST",
-			mode: "no-cors",
 			headers: {
 				accept: "*/*",
+				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
-				name: "John Doe",
-				salary: 5000,
-				companyValuation: 500000,
+				name,
+				salary,
+				companyValuation,
 			}),
 		},
 	);

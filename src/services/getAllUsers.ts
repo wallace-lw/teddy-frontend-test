@@ -1,27 +1,25 @@
 // import queryString from "query-string";
 
-// interface IProps {
-// 	params: {
-// 		page?: number;
-// 		limit?: number;
-// 	};
-// }
+import { IAllUsersResponse } from "@/interfaces";
 
-export const getAllUsers = async () => {
-	// const stringParams = queryString.stringify(
-	// 	{ limit: 16, page: 1 },
-	// 	{
-	// 		skipNull: true,
-	// 		skipEmptyString: true,
-	// 	},
-	// );
+interface IProps {
+	page?: number;
+	limit?: number;
+}
+
+export const getAllUsers = async ({
+	page = 1,
+	limit = 16,
+}: IProps): Promise<IAllUsersResponse> => {
 	const response = await fetch(
-		"https://boasorte.teddybackoffice.com.br/users?page=1&limit=16",
+		`https://cors-anywhere.herokuapp.com/https://boasorte.teddybackoffice.com.br/users?page=${page}&limit=${limit}`,
 		{
 			method: "GET",
 			mode: "cors",
 		},
 	);
 
-	return await response.json();
+	const data: IAllUsersResponse = await response.json();
+	console.log(data);
+	return data;
 };
