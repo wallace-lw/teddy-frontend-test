@@ -11,15 +11,20 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "../ui/button";
 import { Trash } from "lucide-react";
+import { useDeleteCustomer } from "@/hooks/useDeleteCustomer";
 
 interface IProps {
-	customer?: {
-		name: string;
-		id: string;
-	};
+	name: string;
+	id: number;
 }
 
-export const DeleteCustomerDialog: React.FC<IProps> = ({ customer }) => {
+export const DeleteCustomerDialog: React.FC<IProps> = ({ name, id }) => {
+	const { mutate } = useDeleteCustomer(id);
+
+	const handleDeleteUser = async () => {
+		mutate();
+	};
+
 	return (
 		<AlertDialog>
 			<AlertDialogTrigger>
@@ -29,7 +34,7 @@ export const DeleteCustomerDialog: React.FC<IProps> = ({ customer }) => {
 			</AlertDialogTrigger>
 			<AlertDialogContent>
 				<AlertDialogHeader>
-					<AlertDialogTitle>Excluir cliente: {customer?.name}</AlertDialogTitle>
+					<AlertDialogTitle>Excluir cliente: {name}</AlertDialogTitle>
 					<AlertDialogDescription>
 						Esta ação não pode ser desfeita, tem certeza que quer excluir?
 					</AlertDialogDescription>
@@ -38,7 +43,10 @@ export const DeleteCustomerDialog: React.FC<IProps> = ({ customer }) => {
 					<AlertDialogCancel className="border border-teddy-orange text-teddy-orange">
 						Cancelar
 					</AlertDialogCancel>
-					<AlertDialogAction className="bg-teddy-orange font-semibold">
+					<AlertDialogAction
+						className="bg-teddy-orange font-semibold"
+						onClick={handleDeleteUser}
+					>
 						Excluir
 					</AlertDialogAction>
 				</AlertDialogFooter>

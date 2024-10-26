@@ -23,6 +23,7 @@ export const CustomerCard: React.FC<ICustomerCardProps> = ({
 	isSelected,
 	companyValuation,
 	name,
+	id,
 	salary,
 }) => {
 	const convertedSalary = formatToBRLCurrency(salary);
@@ -52,7 +53,7 @@ export const CustomerCard: React.FC<ICustomerCardProps> = ({
 					<Button className="bg-transparent text-black p-0">
 						<Pencil />
 					</Button>
-					<DeleteCustomerDialog />
+					<DeleteCustomerDialog id={id} name={name} />
 				</div>
 			)}
 		</div>
