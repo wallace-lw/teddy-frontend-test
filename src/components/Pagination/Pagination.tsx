@@ -23,8 +23,6 @@ export const PaginationComponent: React.FC<IProps> = ({
 	totalPages,
 	limit,
 }) => {
-	// const [pageNumber, setPageNumber] = useState(1);
-
 	const pages = Array.from({ length: totalPages }, (_, i) => ({
 		label: i + 1,
 		page: i + 1,
@@ -42,7 +40,36 @@ export const PaginationComponent: React.FC<IProps> = ({
 		if (totalPages) {
 			searchParams.set("page", String(totalPages));
 			navigate(`/clientes?page=${totalPages}&limit=${limit}`);
+			// window.location.reload();
 		}
+	};
+
+	const handleFirstPage = () => {
+		if (currentPage === 1) return;
+		searchParams.set("page", String(1));
+		navigate(`/clientes?page=1&limit=${limit}`);
+		// window.location.reload();
+	};
+
+	const handleButtonNavigation = (page: number) => {
+		if (currentPage === page) return;
+		searchParams.set("page", String(page));
+		navigate(`/clientes?page=${page}&limit=${limit}`);
+		// window.location.reload();
+	};
+
+	const handleNextPage = () => {
+		if (currentPage === totalPages) return;
+		searchParams.set("page", String(currentPage + 1));
+		navigate(`/clientes?page=${currentPage + 1}&limit=${limit}`);
+		// window.location.reload();
+	};
+
+	const handlePreviousPage = () => {
+		if (currentPage === 1) return;
+		searchParams.set("page", String(currentPage - 1));
+		navigate(`/clientes?page=${currentPage - 1}&limit=${limit}`);
+		// window.location.reload();
 	};
 
 	return (
@@ -50,7 +77,7 @@ export const PaginationComponent: React.FC<IProps> = ({
 			<PaginationContent className="mt-4 flex w-full items-center justify-center py-2">
 				<PaginationItem>
 					<PaginationButton
-						action={() => console.log("teste")}
+						action={handleFirstPage}
 						Icon={ChevronsLeft}
 						currentPage={currentPage}
 						pageNumber={1}
@@ -60,7 +87,7 @@ export const PaginationComponent: React.FC<IProps> = ({
 
 				<PaginationItem>
 					<PaginationButton
-						action={() => console.log("teste")}
+						action={handlePreviousPage}
 						Icon={ChevronLeft}
 						currentPage={currentPage}
 						pageNumber={1}
@@ -71,7 +98,7 @@ export const PaginationComponent: React.FC<IProps> = ({
 				{pages.map((item) => {
 					return (
 						<PaginationButton
-							action={() => console.log("teste")}
+							action={() => handleButtonNavigation(item.page)}
 							text={item.label.toString()}
 							key={item.page}
 							isActive={currentPage === item.page}
@@ -81,7 +108,7 @@ export const PaginationComponent: React.FC<IProps> = ({
 
 				<PaginationItem>
 					<PaginationButton
-						action={() => console.log("teste")}
+						action={handleNextPage}
 						Icon={ChevronRight}
 						currentPage={currentPage}
 						pageNumber={1}

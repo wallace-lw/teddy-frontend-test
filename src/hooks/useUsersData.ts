@@ -8,7 +8,7 @@ interface IProps {
 
 export const useUsersData = ({ limit, page }: IProps) => {
 	const query = useQuery({
-		queryKey: ["users"],
+		queryKey: ["users", page, limit],
 		queryFn: () => getAllUsers({ page, limit }),
 	});
 
