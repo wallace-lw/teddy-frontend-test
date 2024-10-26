@@ -16,6 +16,6 @@ export const getAllUsers = async ({
 	});
 
 	const data: IAllUsersResponse = await response.json();
-	console.log(data);
+
 	return data;
 };
