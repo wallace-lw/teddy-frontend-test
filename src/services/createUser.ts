@@ -1,5 +1,3 @@
-import { useLocation } from "react-router-dom";
-
 interface IProps {
 	name: string;
 	salary: number;

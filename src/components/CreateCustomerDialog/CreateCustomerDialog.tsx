@@ -13,7 +13,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ErrorMessage } from "../ErrorMessage";
 import { cn } from "@/lib/utils";
-import { createUser } from "@/services/createUser";
 
 export const CreateCustomerDialog = () => {
 	const {
@@ -24,8 +23,8 @@ export const CreateCustomerDialog = () => {
 		resolver: zodResolver(customerSchema),
 	});
 
-	const onSubmit = async () => {
-		await createUser();
+	const onSubmit = async (data: CustomerSchema) => {
+		console.log(data);
 	};
 
 	return (

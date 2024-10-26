@@ -1,5 +1,3 @@
-// import queryString from "query-string";
-
 import { IAllUsersResponse } from "@/interfaces";
 
 interface IProps {

@@ -24,7 +24,7 @@ export const PaginationComponent: React.FC<IProps> = ({
 	totalPages,
 	limit,
 }) => {
-	const [pageNumber, setPageNumber] = useState(1);
+	// const [pageNumber, setPageNumber] = useState(1);
 
 	const pages = Array.from({ length: totalPages }, (_, i) => ({
 		label: i + 1,
@@ -41,7 +41,6 @@ export const PaginationComponent: React.FC<IProps> = ({
 	const handleLastPage = () => {
 		if (currentPage === totalPages) return;
 		if (totalPages) {
-			setPageNumber(totalPages);
 			searchParams.set("page", String(totalPages));
 			navigate(`/clientes?page=${totalPages}&limit=${limit}`);
 		}
