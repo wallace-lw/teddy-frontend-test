@@ -13,8 +13,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ErrorMessage } from "../ErrorMessage";
 import { cn } from "@/lib/utils";
-import { createUser } from "@/services/createUser";
 import { useState } from "react";
+import { useCreateCustomer } from "@/hooks/useCreateCustomer";
 
 export const CreateCustomerDialog = () => {
 	const [dialogIsOpen, setDialogIsOpen] = useState(false);
@@ -31,12 +31,10 @@ export const CreateCustomerDialog = () => {
 		setDialogIsOpen((prev) => !prev);
 	};
 
+	const { mutate } = useCreateCustomer();
+
 	const onSubmit = async (data: CustomerSchema) => {
-		await createUser({
-			companyValuation: Number(data.companyValuation),
-			name: data.name,
-			salary: Number(data.salary),
-		});
+		mutate(data);
 		setDialogIsOpen(false);
 	};
 
