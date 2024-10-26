@@ -9,10 +9,11 @@ import {
 } from "../ui/select";
 import { useUsersData } from "@/hooks/useUsersData";
 import { PaginationComponent } from "../Pagination";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export const Customers = () => {
 	const [searchParams] = useSearchParams();
+	const navigate = useNavigate();
 
 	const page = searchParams.get("page");
 	const limit = searchParams.get("limit");
@@ -21,6 +22,12 @@ export const Customers = () => {
 		page: Number(page),
 		limit: Number(limit),
 	});
+
+	const handleTotalItemsPerPage = (value: string) => {
+		console.log(value);
+		searchParams.set("limit", value);
+		navigate(`/clientes?page=1&limit=${value}`);
+	};
 
 	if (isLoading) {
 		return <p>Loading...</p>;
@@ -47,9 +54,9 @@ export const Customers = () => {
 			</div>
 			<div className="w-full flex items-center mt-2 gap-3">
 				<p className="font-semibold">Clientes por página:</p>
-				<Select>
+				<Select onValueChange={(value) => handleTotalItemsPerPage(value)}>
 					<SelectTrigger className="w-14">
-						<SelectValue />
+						<SelectValue placeholder={searchParams.get("limit")} />
 					</SelectTrigger>
 					<SelectContent>
 						<SelectGroup>
@@ -63,7 +70,7 @@ export const Customers = () => {
 			<PaginationComponent
 				totalPages={data?.totalPages!}
 				currentPage={data?.currentPage!}
-				limit={16}
+				limit={Number(limit)}
 			/>
 		</div>
 	);
