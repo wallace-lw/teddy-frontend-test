@@ -10,6 +10,7 @@ import { Button } from "../ui/button";
 import { CardItem } from "./CardItem";
 import { DeleteCustomerDialog } from "@/components";
 import { formatToBRLCurrency } from "@/utils";
+import { UpdateCustomerDialog } from "../UpdateCustomerDialog/UpdateCustomerDialog";
 
 interface ICustomerCardProps {
 	isSelected?: boolean;
@@ -50,9 +51,12 @@ export const CustomerCard: React.FC<ICustomerCardProps> = ({
 					<Button className="bg-transparent text-black p-0">
 						<Plus />
 					</Button>
-					<Button className="bg-transparent text-black p-0">
-						<Pencil />
-					</Button>
+					<UpdateCustomerDialog
+						id={id}
+						name={name}
+						salary={salary}
+						companyValuation={companyValuation}
+					/>
 					<DeleteCustomerDialog id={id} name={name} />
 				</div>
 			)}
