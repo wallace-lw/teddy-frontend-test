@@ -3,7 +3,7 @@ export default async function handler(req, res) {
   try {
     const url = decodeURIComponent(req.url.split('/api/proxy?')[1])
 
-    let urlReplaced
+    let urlReplaced = url
 
     if(req.method === 'POST' || req.method === 'PATCH') {
       urlReplaced = url.replace("=", "")
