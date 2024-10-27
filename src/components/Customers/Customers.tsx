@@ -10,10 +10,13 @@ import {
 import { useUsersData } from "@/hooks/useUsersData";
 import { PaginationComponent } from "../Pagination";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSelectedCustomers } from "@/hooks/useSelectedCustomers";
 
 export const Customers = () => {
 	const [searchParams] = useSearchParams();
 	const navigate = useNavigate();
+	const { handleSelectCustomer, selectedCustomers, handleDeselectCustomer } =
+		useSelectedCustomers();
 
 	const page = searchParams.get("page");
 	const limit = searchParams.get("limit");
@@ -50,6 +53,11 @@ export const Customers = () => {
 								id={customer.id}
 								name={customer.name}
 								salary={customer.salary}
+								handleSelectCustomer={() => handleSelectCustomer(customer)}
+								handleDeselectCustomer={() => handleDeselectCustomer(customer)}
+								isSelected={selectedCustomers.some(
+									(selectedCustomer) => selectedCustomer.id === customer.id,
+								)}
 							/>
 						))}
 			</div>
