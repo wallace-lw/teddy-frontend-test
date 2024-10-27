@@ -12,24 +12,6 @@ export default async function handler(req, res) {
     const bodyContent = req.method === 'POST' || req.method === 'PATCH' ? req.body : undefined;
 
 
-    if(req.method === 'DELETE') {
-      await fetch(url, {
-        method: req.method,
-        headers: {
-          'Origin': req.headers.origin,
-        },
-      });
-
-
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE,PATCH');
-      res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-      res.setHeader('Content-Type', 'application/json');
-
-      res.status(200)
-    }
-
-
     const response = await fetch(urlReplaced, {
       method: req.method,
       headers: {
