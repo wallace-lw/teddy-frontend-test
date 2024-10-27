@@ -8,13 +8,13 @@ import {
 	DialogTrigger,
 } from "../ui/dialog";
 import { Input } from "../ui/input";
-import { CustomerSchema, customerSchema } from "../../schemas/customer-schema";
+import { CustomerSchema, customerSchema } from "@/schemas";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ErrorMessage } from "../ErrorMessage";
+import { ErrorMessage } from "@/components";
 import { cn } from "@/lib/utils";
 import { useCallback, useState } from "react";
-import { useCreateCustomer } from "@/hooks/useCreateCustomer";
+import { useCreateCustomer } from "@/hooks";
 import { onlyNumberCurrencyMask } from "@/utils";
 
 export const CreateCustomerDialog = () => {
