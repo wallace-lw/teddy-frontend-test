@@ -1,5 +1,6 @@
 import { CustomerSchema } from "@/schemas";
 import { createCustomer } from "@/services";
+import { formatCurrencyToNumber } from "@/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const useCreateCustomer = () => {
@@ -8,9 +9,9 @@ export const useCreateCustomer = () => {
 	const mutation = useMutation({
 		mutationFn: async (data: CustomerSchema) => {
 			await createCustomer({
-				companyValuation: Number(data.companyValuation),
+				companyValuation: formatCurrencyToNumber(data.companyValuation),
 				name: data.name,
-				salary: Number(data.salary),
+				salary: formatCurrencyToNumber(data.salary),
 			});
 		},
 		onSuccess: () => {
