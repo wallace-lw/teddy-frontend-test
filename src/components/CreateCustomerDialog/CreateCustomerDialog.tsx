@@ -13,8 +13,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ErrorMessage } from "../ErrorMessage";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useCreateCustomer } from "@/hooks/useCreateCustomer";
+import { onlyNumberCurrencyMask } from "@/utils";
 
 export const CreateCustomerDialog = () => {
 	const [dialogIsOpen, setDialogIsOpen] = useState(false);
@@ -22,6 +23,7 @@ export const CreateCustomerDialog = () => {
 	const {
 		handleSubmit,
 		register,
+		reset,
 		formState: { errors },
 	} = useForm<CustomerSchema>({
 		resolver: zodResolver(customerSchema),
@@ -36,7 +38,10 @@ export const CreateCustomerDialog = () => {
 	const onSubmit = async (data: CustomerSchema) => {
 		mutate(data);
 		setDialogIsOpen(false);
+		reset();
 	};
+
+	const handleOnlyNumberCurrencyMask = useCallback(onlyNumberCurrencyMask, []);
 
 	return (
 		<Dialog open={dialogIsOpen} onOpenChange={handleDialogOpening}>
@@ -71,6 +76,7 @@ export const CreateCustomerDialog = () => {
 						placeholder="Digite o salário:"
 						autoComplete="off"
 						{...register("salary")}
+						onKeyUp={handleOnlyNumberCurrencyMask}
 						className={cn(
 							"h-12 px-2  border-teddy-gray-primary  placeholder:text-teddy-gray-secondary",
 							errors.name?.message
@@ -92,6 +98,7 @@ export const CreateCustomerDialog = () => {
 								? "focus-visible:ring-red-700"
 								: "focus-visible:ring-teddy-orange",
 						)}
+						onKeyUp={handleOnlyNumberCurrencyMask}
 					/>
 					{errors.companyValuation?.message && (
 						<ErrorMessage message={errors.companyValuation.message} />
