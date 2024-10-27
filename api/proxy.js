@@ -3,9 +3,11 @@ export default async function handler(req, res) {
   try {
     const url = decodeURIComponent(req.url.split('/api/proxy?')[1])
 
+    const urlReplaced = url.replace("=", "")
+
     const bodyContent = req.method === 'POST' || req.method === 'PATCH' ? req.body : undefined;
 
-    const response = await fetch(url, {
+    const response = await fetch(urlReplaced, {
       method: req.method,
       headers: {
         ...req.headers,
