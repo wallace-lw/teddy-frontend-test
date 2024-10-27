@@ -27,7 +27,6 @@ export const Customers = () => {
 	});
 
 	const handleTotalItemsPerPage = (value: string) => {
-		console.log(value);
 		searchParams.set("limit", value);
 		navigate(`/clientes?page=1&limit=${value}`);
 	};
