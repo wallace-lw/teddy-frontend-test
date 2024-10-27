@@ -3,6 +3,6 @@ export interface ICustomer {
 	name: string;
 	salary: number;
 	companyValuation: number;
-	createdAt: string;
-	updatedAt: string;
+	createdAt?: string;
+	updatedAt?: string;
 }
