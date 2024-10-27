@@ -11,6 +11,8 @@ interface ICustomerCardProps {
 	name: string;
 	salary: number;
 	companyValuation: number;
+	handleSelectCustomer?: () => void;
+	handleDeselectCustomer?: () => void;
 }
 
 export const CustomerCard: React.FC<ICustomerCardProps> = ({
@@ -19,6 +21,8 @@ export const CustomerCard: React.FC<ICustomerCardProps> = ({
 	name,
 	id,
 	salary,
+	handleSelectCustomer,
+	handleDeselectCustomer,
 }) => {
 	const convertedSalary = formatToBRLCurrency(salary);
 	const convertedCompanyValuation = formatToBRLCurrency(companyValuation);
@@ -33,15 +37,20 @@ export const CustomerCard: React.FC<ICustomerCardProps> = ({
 					label={`Empresa: ${convertedCompanyValuation}`}
 				/>
 			</div>
+
 			{isSelected ? (
-				<div className="w-full flex justify-end">
-					<Button className="bg-transparent text-red-700 p-0">
-						<Minus />
-					</Button>
-				</div>
+				<Button
+					className="bg-transparent text-red-700 p-0"
+					onClick={handleDeselectCustomer}
+				>
+					<Minus />
+				</Button>
 			) : (
 				<div className="w-full flex justify-between items-center">
-					<Button className="bg-transparent text-black p-0">
+					<Button
+						className="bg-transparent text-black p-0"
+						onClick={handleSelectCustomer}
+					>
 						<Plus />
 					</Button>
 					<UpdateCustomerDialog
