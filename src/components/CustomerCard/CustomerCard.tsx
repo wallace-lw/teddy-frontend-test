@@ -1,11 +1,4 @@
-import {
-	CircleDollarSign,
-	IdCard,
-	Minus,
-	Pencil,
-	Plus,
-	Wallet,
-} from "lucide-react";
+import { CircleDollarSign, IdCard, Minus, Plus, Wallet } from "lucide-react";
 import { Button } from "../ui/button";
 import { CardItem } from "./CardItem";
 import { DeleteCustomerDialog } from "@/components";
