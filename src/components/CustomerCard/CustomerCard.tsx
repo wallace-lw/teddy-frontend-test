@@ -4,33 +4,30 @@ import { CardItem } from "./CardItem";
 import { DeleteCustomerDialog } from "@/components";
 import { formatToBRLCurrency } from "@/utils";
 import { UpdateCustomerDialog } from "../UpdateCustomerDialog/UpdateCustomerDialog";
+import { ICustomer } from "@/interfaces";
 
 interface ICustomerCardProps {
 	isSelected?: boolean;
-	id: number;
-	name: string;
-	salary: number;
-	companyValuation: number;
+	customer: ICustomer;
 	handleSelectCustomer?: () => void;
 	handleDeselectCustomer?: () => void;
 }
 
 export const CustomerCard: React.FC<ICustomerCardProps> = ({
 	isSelected,
-	companyValuation,
-	name,
-	id,
-	salary,
+	customer,
 	handleSelectCustomer,
 	handleDeselectCustomer,
 }) => {
-	const convertedSalary = formatToBRLCurrency(salary);
-	const convertedCompanyValuation = formatToBRLCurrency(companyValuation);
+	const convertedSalary = formatToBRLCurrency(customer.salary);
+	const convertedCompanyValuation = formatToBRLCurrency(
+		customer.companyValuation,
+	);
 
 	return (
 		<div className="border border-teddy-gray-primary w-full rounded p-4 flex flex-col gap-4 text-sm md:text-[1rem]">
 			<div className="flex flex-col gap-2">
-				<CardItem Icon={IdCard} label={name} />
+				<CardItem Icon={IdCard} label={customer.name} />
 				<CardItem Icon={Wallet} label={`Salário: ${convertedSalary}`} />
 				<CardItem
 					Icon={CircleDollarSign}
@@ -54,12 +51,12 @@ export const CustomerCard: React.FC<ICustomerCardProps> = ({
 						<Plus />
 					</Button>
 					<UpdateCustomerDialog
-						id={id}
-						name={name}
-						salary={salary}
-						companyValuation={companyValuation}
+						id={customer.id}
+						name={customer.name}
+						salary={customer.salary}
+						companyValuation={customer.companyValuation}
 					/>
-					<DeleteCustomerDialog id={id} name={name} />
+					<DeleteCustomerDialog id={customer.id} name={customer.name} />
 				</div>
 			)}
 		</div>
