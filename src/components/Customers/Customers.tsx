@@ -48,10 +48,7 @@ export const Customers = () => {
 					: data?.clients.map((customer) => (
 							<CustomerCard
 								key={customer.id}
-								companyValuation={customer.companyValuation}
-								id={customer.id}
-								name={customer.name}
-								salary={customer.salary}
+								customer={customer}
 								handleSelectCustomer={() => handleSelectCustomer(customer)}
 								handleDeselectCustomer={() => handleDeselectCustomer(customer)}
 								isSelected={selectedCustomers.some(
