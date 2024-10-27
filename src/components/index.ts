@@ -5,3 +5,4 @@ export * from "./CustomerCard";
 export * from "./Customers";
 export * from "./CreateCustomerDialog";
 export * from "./DeleteCustomerDialog";
+export * from "./Sidebar";
